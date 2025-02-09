@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Please be my valentine</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!-- Import JS file -->
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+<h1>Will you be my valentine? </h1>
+
+<img src="cats.jpg" class="cats">
+
+<div class="answerbuttons">
+<a href="yes.html" class="links"> Yes</a>
+<a href="no.html" class="links"> No</a>
+</div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      const noButton = $('.links').eq(1);
+      
+      noButton.hover(function(e) {
+        const x = Math.random() * ($(window).width() - $(this).width());
+        const y = Math.random() * ($(window).height() - $(this).height());
+        
+        $(this).css({
+          position: 'fixed',
+          left: x + 'px',
+          top: y + 'px'
+        });
+      });
+
+      $('.links').eq(0).click(function(e) {
+        e.preventDefault();
+        $('body').append('<div class="hearts"></div>');
+        for(let i = 0; i < 50; i++) {
+          createHeart();
+        }
+        setTimeout(function() {
+          window.location.href = 'yes.html';
+        }, 1000);
+      });
+
+      function createHeart() {
+        const heart = $('<div>❤️</div>');
+        heart.css({
+          position: 'fixed',
+          left: Math.random() * 100 + 'vw',
+          top: '100vh',
+          fontSize: (Math.random() * 20 + 20) + 'px',
+          animation: 'float 3s ease-in forwards',
+          opacity: 0,
+          zIndex: 999
+        });
+        $('.hearts').append(heart);
+        setTimeout(() => heart.remove(), 3000);
+      }
+    });
+  </script>
+</html>
